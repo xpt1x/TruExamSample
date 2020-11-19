@@ -9,6 +9,8 @@ import { navigate } from "@reach/router";
 import { CardActionArea, Container, Tooltip } from "@material-ui/core";
 import FetchSubmissions from "./FetchSubmissions";
 import Loading from "./Loading";
+import RateReviewIcon from '@material-ui/icons/RateReview';
+
 
 const useStyles = makeStyles((theme) => ({
   fab: {
@@ -28,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
   },
   cover: {
     float: "right",
-    marginTop: -70,
+    marginTop: -45,
   }
 }));
 
@@ -58,13 +60,14 @@ export default function Review({ enqueueSnackbar, setSubs, setSelection, subs })
             >
               {sub.name}
             </Typography>
-            <Typography
+            {/* <Typography
               className={classes.sub}
               color="textSecondary"
               gutterBottom
             >
               {sub.details}
-            </Typography>
+            </Typography> */}
+            <RateReviewIcon />
             <div className={classes.cover}>
             <img src={sub.imageurl} alt={sub.name} width={100} height={100}></img>
             </div>
@@ -86,7 +89,7 @@ export default function Review({ enqueueSnackbar, setSubs, setSelection, subs })
       >
         <AddIcon />
       </Fab>
-      </Tooltip>   
+      </Tooltip>  
     </Container>
   );
 }

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Container, CssBaseline, Dialog, DialogContent, DialogTitle, FormControl, InputLabel, MenuItem, Select } from '@material-ui/core';
+import { Card, CardContent, CardHeader, Container, CssBaseline, Dialog, DialogContent, DialogTitle, FormControl, Grid, InputLabel, MenuItem, Select, Typography } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 
 import Api from './Api';
@@ -31,6 +31,9 @@ const useStyles = makeStyles((theme) => ({
   formcontrol: {
       marginTop: theme.spacing(3),
       minWidth: 150
+  },
+  card: {
+    marginTop: theme.spacing(3)
   }
 }));
 
@@ -75,6 +78,12 @@ export default function ReviewTask({enqueueSnackbar, selection}) {
     <Button variant="outlined" color="secondary" onClick={() => setSubOpen(true)}>
         Submitted Task Image
     </Button>
+    <Card className={classes.card}>
+      <CardHeader title={selection.name} />
+      <CardContent>
+        <Typography>
+          {selection.details}
+        </Typography>
     <FormControl className={classes.formcontrol}>
     <InputLabel id="select-rating">Provide Rating</InputLabel>
 
@@ -92,9 +101,13 @@ export default function ReviewTask({enqueueSnackbar, selection}) {
 
         </Select>
     </FormControl>
-    <Button style={{marginTop: 50}} size="large" variant="outlined" color="primary" onClick={handleSubmit}>
-        Submit Rating
-    </Button>
+    <Grid container justify="center">
+      <Button style={{marginTop: 50}} size="large" variant="outlined" color="secondary" onClick={handleSubmit}>
+          Submit Rating
+      </Button>
+    </Grid>
+      </CardContent>
+    </Card>
   </div>
   
   </Container>

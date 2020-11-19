@@ -7,6 +7,7 @@ import FetchTasks from './FetchTasks';
 import { CardActionArea, Container } from '@material-ui/core';
 import Loading from './Loading';
 import { navigate } from '@reach/router';
+import RateReviewIcon from '@material-ui/icons/RateReview';
 
 const useStyles = makeStyles((theme) => ({
   fab: {
@@ -25,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   },
   cover: {
     float: "right",
-    marginTop: -70,
+    marginTop: -45,
   }
 }));
 
@@ -57,13 +58,14 @@ export default function Tasks({tasks, setTasks, enqueueSnackbar, setSelection}) 
             >
               {task.name}
             </Typography>
-            <Typography
+            {/* <Typography
               className={classes.task}
               color="textSecondary"
               gutterBottom
             >
               {task.details}
-            </Typography>
+            </Typography> */}
+            <RateReviewIcon />
             <div className={classes.cover}>
             <img src={task.imageurl} alt={task.name} width={100} height={100}></img>
             </div>

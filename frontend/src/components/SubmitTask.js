@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Container, CssBaseline, Grid } from '@material-ui/core';
+import { Container, CssBaseline, Dialog, DialogContent, DialogTitle, Grid } from '@material-ui/core';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import Button from '@material-ui/core/Button';
 import SendIcon from '@material-ui/icons/Send';
@@ -55,6 +55,7 @@ export default function SubmitTask({enqueueSnackbar, selection}) {
     })
   }
   const [loading, setLoading] = useState(false)
+  const [open, setOpen] = useState(false)
   return (
   <>
   <Loading  open={loading}/>
@@ -76,7 +77,9 @@ export default function SubmitTask({enqueueSnackbar, selection}) {
             <PhotoCamera />
           Upload
         </Button>
-
+        <Button style={{marginLeft: 10}} variant="outlined" color="primary" onClick={() => setOpen(true)}>
+          View Editorial
+        </Button>
         </Grid>
       </label>
 
@@ -95,6 +98,14 @@ export default function SubmitTask({enqueueSnackbar, selection}) {
     </form>
   </div>
   </Container>
+  <Dialog open={open} onClose={() => setOpen(false)}>
+        <DialogTitle>
+            Editorial for this task
+        </DialogTitle>
+        <DialogContent dividers>
+        {selection.details}
+        </DialogContent>
+  </Dialog> 
   </>
   );
 }
