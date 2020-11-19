@@ -47,7 +47,7 @@ export default function Review({ enqueueSnackbar, setSubs, setSelection, subs })
     <Container style={{width: '100%', marginTop: 48}}>
       {subs === undefined ? <Loading open={true} /> : 
       subs.length > 0 ? subs.map((sub) => (
-        <Container>
+        <Container key={sub.name} style={{marginTop: 48}}>
         <CardActionArea>
         <Card className={classes.root} onClick={() => cardClickHandler(sub)}>
           <CardContent>

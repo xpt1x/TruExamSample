@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Container, CssBaseline, Grid } from '@material-ui/core';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 import SendIcon from '@material-ui/icons/Send';
 import Api from './Api';
 import { navigate } from '@reach/router';
+import Loading from './Loading';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -36,7 +37,9 @@ export default function SubmitTask({enqueueSnackbar, selection}) {
     const formdata = new FormData()
     formdata.append('tid', selection.id)
     formdata.append('docimage', image)
+    setLoading(true)
     Api.post('/submit', formdata).then(response => {
+      setLoading(false)
       if(!response.ok) {
         enqueueSnackbar(response.problem, {variant: 'error'})
       }
@@ -51,7 +54,10 @@ export default function SubmitTask({enqueueSnackbar, selection}) {
       }
     })
   }
+  const [loading, setLoading] = useState(false)
   return (
+  <>
+  <Loading  open={loading}/>
   <Container component="main" maxWidth="xs">
   <CssBaseline />
   <div className={classes.paper}>
@@ -89,5 +95,6 @@ export default function SubmitTask({enqueueSnackbar, selection}) {
     </form>
   </div>
   </Container>
+  </>
   );
 }

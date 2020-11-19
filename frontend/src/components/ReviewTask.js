@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 
 import Api from './Api';
 import { navigate } from '@reach/router';
+import Loading from './Loading';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -41,11 +42,12 @@ export default function ReviewTask({enqueueSnackbar, selection}) {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-
+    setLoading(true)
     const formdata = new FormData()
     formdata.append('sid', selection.id)
     formdata.append('score', rating)
     Api.post('/submitscore', formdata).then(response => {
+      setLoading(false)
       if(!response.ok) {
         enqueueSnackbar(response.problem, {variant: 'error'})
       }
@@ -60,8 +62,10 @@ export default function ReviewTask({enqueueSnackbar, selection}) {
       }
     })
   }
+  const [loading, setLoading] = useState(false)
   return (
     <>
+    <Loading open={loading} />
   <Container component="main" maxWidth="xs">
   <CssBaseline />
   <div className={classes.paper}>

@@ -46,7 +46,7 @@ export default function Tasks({tasks, setTasks, enqueueSnackbar, setSelection}) 
       {tasks === undefined ? <Loading open={true} /> :
       tasks.length > 0 ?
       tasks.map((task) => (
-        <Container style={{marginTop: 48}}>
+        <Container key={task.name} style={{marginTop: 48}}>
         <CardActionArea>
         <Card className={classes.root} onClick={() => cardClickHandler(task)}>
           <CardContent>
