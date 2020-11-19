@@ -43,3 +43,5 @@ $ python3 manage.py createsuperuser
 ```
 then visit: http://127.0.0.1:8000/admin/
 
+`Application's backend is deployed on heroku with free dynos which cause delay in response`
+
