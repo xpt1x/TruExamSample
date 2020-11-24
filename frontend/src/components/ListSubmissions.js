@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function Review({ enqueueSnackbar, setSubs, setSelection, subs }) {
+export default function ListSubmissions({ enqueueSnackbar, setSubs, setSelection, subs }) {
   const classes = useStyles();
   useEffect(() => {
     FetchSubmissions({ setSubs, enqueueSnackbar });
@@ -42,14 +42,14 @@ export default function Review({ enqueueSnackbar, setSubs, setSelection, subs })
 
   const cardClickHandler = (sub) => {
     setSelection(sub)
-    return navigate(`/review/${sub.id}`)
+    return navigate(`/review/${sub.task_id}`)
   }
 
   return (
     <Container style={{width: '100%', marginTop: 48}}>
       {subs === undefined ? <Loading open={true} /> : 
       subs.length > 0 ? subs.map((sub) => (
-        <Container key={sub.name} style={{marginTop: 48}}>
+        <Container key={sub.task_name} style={{marginTop: 48}}>
         <CardActionArea>
         <Card className={classes.root} onClick={() => cardClickHandler(sub)}>
           <CardContent>
@@ -58,7 +58,7 @@ export default function Review({ enqueueSnackbar, setSubs, setSelection, subs })
               color="textSecondary"
               gutterBottom
             >
-              {sub.name}
+              {sub.task_name}
             </Typography>
             {/* <Typography
               className={classes.sub}
@@ -69,7 +69,7 @@ export default function Review({ enqueueSnackbar, setSubs, setSelection, subs })
             </Typography> */}
             <RateReviewIcon />
             <div className={classes.cover}>
-            <img src={sub.imageurl} alt={sub.name} width={100} height={100}></img>
+            <img src={sub.image} alt={sub.task_name} width={100} height={100}></img>
             </div>
           </CardContent>
         </Card>

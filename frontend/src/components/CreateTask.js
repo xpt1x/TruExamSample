@@ -38,22 +38,17 @@ export default function CreateTask({enqueueSnackbar}) {
     const formdata = new FormData()
     formdata.append('name', name)
     formdata.append('details', details)
-    formdata.append('docimage', image)
+    formdata.append('image', image)
     setLoading(true)
-    Api.post('/add', formdata).then(response => {
+    Api.post('tasks/', formdata).then(response => {
       setLoading(false)
       if(!response.ok) {
         enqueueSnackbar(response.problem, {variant: 'error'})
       }
       else {
-        if(response.data.success) {
         enqueueSnackbar('Created task successfully', {variant: 'success'})
           navigate('/')
         }
-        else {
-          enqueueSnackbar(response.data.err, {variant: 'error'})
-        }
-      }
     })
   }
   const [loading, setLoading] = useState(false)

@@ -9,7 +9,7 @@ import {Router} from '@reach/router'
 import Landing from './components/Landing'
 import Tasks from './components/Tasks'
 import CreateTask from './components/CreateTask'
-import Review from './components/Review'
+import ListSubmissions from './components/ListSubmissions'
 import ReviewTask from "./components/ReviewTask";
 import { useState } from "react";
 import SubmitTask from "./components/SubmitTask";
@@ -48,7 +48,7 @@ function App()
           <Landing path="/" default />
           <CreateTask path="create" {...glProps}/>
           <Tasks path="tasks" {...glProps} />
-          <Review path="view" {...glProps} />
+          <ListSubmissions path="view" {...glProps} />
           <ReviewTask path="review/:taskid" {...glProps} />
           <SubmitTask path="submit/:taskid" {...glProps} />
         </Router>

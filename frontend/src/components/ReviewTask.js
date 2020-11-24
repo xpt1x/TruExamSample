@@ -47,22 +47,16 @@ export default function ReviewTask({enqueueSnackbar, selection}) {
     event.preventDefault()
     setLoading(true)
     const formdata = new FormData()
-    formdata.append('sid', selection.id)
     formdata.append('score', rating)
-    Api.post('/submitscore', formdata).then(response => {
+    Api.patch(selection.url, formdata).then(response => {
       setLoading(false)
       if(!response.ok) {
         enqueueSnackbar(response.problem, {variant: 'error'})
       }
       else {
-        if(response.data.success) {
         enqueueSnackbar('Submitted Score successfully', {variant: 'success'})
           navigate('/')
         }
-        else {
-          enqueueSnackbar(response.data.err, {variant: 'error'})
-        }
-      }
     })
   }
   const [loading, setLoading] = useState(false)
@@ -79,10 +73,10 @@ export default function ReviewTask({enqueueSnackbar, selection}) {
         Submitted Task Image
     </Button>
     <Card className={classes.card}>
-      <CardHeader title={selection.name} />
+      <CardHeader title={selection.task_name} />
       <CardContent>
         <Typography>
-          {selection.details}
+          {selection.task_details}
         </Typography>
     <FormControl className={classes.formcontrol}>
     <InputLabel id="select-rating">Provide Rating</InputLabel>
@@ -116,7 +110,7 @@ export default function ReviewTask({enqueueSnackbar, selection}) {
         Original Task Image
     </DialogTitle>
     <DialogContent dividers>
-    <img src={selection.original_image_url} alt={"original"} width={250} height={250} />
+    <img src={selection.task_image} alt={"original"} width={250} height={250} />
     </DialogContent>
   </Dialog>
 
@@ -125,7 +119,7 @@ export default function ReviewTask({enqueueSnackbar, selection}) {
         Submitted Task Image
     </DialogTitle>
     <DialogContent dividers>
-    <img src={selection.imageurl} alt={"submitted"} width={250} height={250} />
+    <img src={selection.image} alt={"submitted"} width={250} height={250} />
     </DialogContent>
   </Dialog>
   </>

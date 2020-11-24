@@ -67,7 +67,7 @@ export default function Tasks({tasks, setTasks, enqueueSnackbar, setSelection}) 
             </Typography> */}
             <RateReviewIcon />
             <div className={classes.cover}>
-            <img src={task.imageurl} alt={task.name} width={100} height={100}></img>
+            <img src={task.image} alt={task.name} width={100} height={100}></img>
             </div>
           </CardContent>
         </Card>

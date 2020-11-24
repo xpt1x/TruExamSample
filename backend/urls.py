@@ -1,11 +1,11 @@
-from django.urls import path
+from django.urls import path, include
 from .views import *
+from rest_framework import routers
+
+router = routers.DefaultRouter()
+router.register('tasks', TaskViewSet)
+router.register('subs', SubmissionViewSet)
 
 urlpatterns = [
-    path('add', add_task),
-    path('getTasks', get_tasks),
-    path('getSubs', get_submissions),
-    path('submit', submit_task),
-    path('submitscore', submit_score),
-    path('taskimage/<int:tid>', get_original_image),
+    path('', include(router.urls)),
 ]

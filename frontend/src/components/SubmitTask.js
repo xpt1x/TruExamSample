@@ -35,22 +35,18 @@ export default function SubmitTask({enqueueSnackbar, selection}) {
     const image = document.getElementById('contained-button-file').files[0]
 
     const formdata = new FormData()
-    formdata.append('tid', selection.id)
-    formdata.append('docimage', image)
+    console.log(selection)
+    formdata.append('task', selection.url)
+    formdata.append('image', image)
     setLoading(true)
-    Api.post('/submit', formdata).then(response => {
+    Api.post('subs/', formdata).then(response => {
       setLoading(false)
       if(!response.ok) {
         enqueueSnackbar(response.problem, {variant: 'error'})
       }
       else {
-        if(response.data.success) {
-        enqueueSnackbar('Work turned in successfully', {variant: 'success'})
+          enqueueSnackbar('Work turned in successfully', {variant: 'success'})
           navigate('/')
-        }
-        else {
-          enqueueSnackbar(response.data.err, {variant: 'error'})
-        }
       }
     })
   }
@@ -62,7 +58,7 @@ export default function SubmitTask({enqueueSnackbar, selection}) {
   <Container component="main" maxWidth="xs">
   <CssBaseline />
   <div className={classes.paper}>
-    <img src={selection.imageurl} alt={selection.name} width={400} height={400} />
+    <img src={selection.image} alt={selection.name} width={400} height={400} />
 
     <form className={classes.form} >
       <input

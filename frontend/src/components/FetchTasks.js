@@ -4,7 +4,7 @@ export default function FetchTasks({setTasks, enqueueSnackbar})
 {
     //const { enqueueSnackbar } = useSnackbar();
 
-    Api.get("/getTasks").then(response => {
+    Api.get("/tasks").then(response => {
         if(!response.ok) {
             enqueueSnackbar('Problem fetching tasks', {variant: 'error'})
             console.log(response.problem)
